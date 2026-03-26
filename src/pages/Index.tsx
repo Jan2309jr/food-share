@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { Heart, Utensils, Users, Leaf, ArrowRight, Quote } from "lucide-react";
 import heroImage from "@/assets/hero-food.jpg";
 import FoodCard from "@/components/FoodCard";
-import { sampleListings, testimonials, stats } from "@/data/sampleData";
+import { sampleListings , stats } from "@/data/sampleData";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -68,31 +68,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Stats */}
-      <section className="py-16 bg-card">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {statItems.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                custom={i}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true }}
-                variants={fadeUp}
-                className="text-center"
-              >
-                <div className="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary/10 flex items-center justify-center">
-                  <stat.icon className="w-6 h-6 text-primary" />
-                </div>
-                <p className="text-3xl font-serif font-bold text-foreground">{stat.value}</p>
-                <p className="text-sm text-muted-foreground mt-1">{stat.label}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
+     
       {/* How It Works */}
       <section className="py-20">
         <div className="container mx-auto px-4 text-center">
@@ -138,35 +114,6 @@ const Index = () => {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featured.map((listing) => (
               <FoodCard key={listing.id} listing={listing} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-20">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-serif font-bold mb-2">Voices of Impact</h2>
-          <p className="text-muted-foreground mb-12">What our community says</p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {testimonials.map((t, i) => (
-              <motion.div key={i} custom={i} initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                <Card className="h-full text-left">
-                  <CardContent className="p-5 flex flex-col gap-4">
-                    <Quote className="w-6 h-6 text-primary/40" />
-                    <p className="text-sm text-muted-foreground flex-1">{t.quote}</p>
-                    <div className="flex items-center gap-3">
-                      <Avatar className="w-9 h-9 bg-primary/10">
-                        <AvatarFallback className="text-primary text-xs font-semibold">{t.avatar}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <p className="text-sm font-medium">{t.name}</p>
-                        <p className="text-xs text-muted-foreground">{t.role}</p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
             ))}
           </div>
         </div>

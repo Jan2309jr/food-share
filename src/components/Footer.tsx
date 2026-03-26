@@ -37,17 +37,14 @@ const Footer = () => (
           <div className="flex flex-col gap-2 text-sm opacity-70">
             <Link to="/donor" className="hover:opacity-100 transition-opacity">Donor Dashboard</Link>
             <Link to="/recipient" className="hover:opacity-100 transition-opacity">Recipient Dashboard</Link>
-            <a href="#" className="hover:opacity-100 transition-opacity">Volunteer</a>
-            <a href="#" className="hover:opacity-100 transition-opacity">Privacy Policy</a>
           </div>
         </div>
 
         <div>
           <h4 className="font-serif font-semibold mb-4">Contact</h4>
           <div className="flex flex-col gap-3 text-sm opacity-70">
-            <div className="flex items-center gap-2"><MapPin className="w-4 h-4 shrink-0" /> Yelahanka, Bangalore 560064</div>
-            <div className="flex items-center gap-2"><Phone className="w-4 h-4 shrink-0" /> +91 98765 43210</div>
-            <div className="flex items-center gap-2"><Mail className="w-4 h-4 shrink-0" /> hello@foodshare.org</div>
+            <div className="flex items-center gap-2"><Phone className="w-4 h-4 shrink-0" /> +91 82960 52779</div>
+            <div className="flex items-center gap-2"><Mail className="w-4 h-4 shrink-0" /> jan2309@gmail.com</div>
           </div>
         </div>
       </div>

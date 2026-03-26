@@ -217,32 +217,6 @@ export const sampleListings: FoodListing[] = [
   },
 ];
 
-export const testimonials: Testimonial[] = [
-  {
-    name: "Priya Sharma",
-    role: "Manager, Meghana Foods",
-    quote: "FoodShare made it incredibly easy for us to donate excess food instead of wasting it. We've helped feed over 500 people in just 3 months!",
-    avatar: "PS",
-  },
-  {
-    name: "Rajesh Kumar",
-    role: "Director, Hope Orphanage",
-    quote: "The children at our orphanage look forward to the meals we receive through FoodShare. It's been a blessing for all 45 kids here.",
-    avatar: "RK",
-  },
-  {
-    name: "Anita Desai",
-    role: "Volunteer, Bangalore Food Bank",
-    quote: "As a volunteer, I've seen firsthand how FoodShare bridges the gap between surplus food and those who need it most. The platform is a game-changer.",
-    avatar: "AD",
-  },
-  {
-    name: "Mohammed Ali",
-    role: "Owner, Ali's Kitchen",
-    quote: "Every night we used to throw away perfectly good food. Now with FoodShare, that food reaches families who truly need it. It feels wonderful.",
-    avatar: "MA",
-  },
-];
 
 export const stats = {
   mealsServed: 15420,
