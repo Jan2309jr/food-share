@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import DonationCard from '../components/DonationCard';
 import Toast from '../components/Toast';
-
-const API_URL = 'http://localhost:5000/api';
+import { API_URL } from '../config.js';
 
 export default function Home({ donations, setDonations }) {
   const [userPhone, setUserPhone] = useState('');
@@ -13,23 +12,23 @@ export default function Home({ donations, setDonations }) {
   const [selectedLocation, setSelectedLocation] = useState('all');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetchDonations();
-  }, []);
-
-  const fetchDonations = async () => {
-    try {
-      const response = await axios.get(`${API_URL}/donations`);
-      setDonations(response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
-    } catch (error) {
-      showToast('Failed to load donations', 'error');
-    }
-  };
-
   const showToast = (message, type) => {
     setToast({ message, type });
     setTimeout(() => setToast(null), 3000);
   };
+
+  useEffect(() => {
+    async function loadDonations() {
+      try {
+        const response = await axios.get(`${API_URL}/donations`);
+        setDonations(response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+      } catch {
+        showToast('Failed to load donations', 'error');
+      }
+    }
+
+    loadDonations();
+  }, [setDonations]);
 
   const handleAvail = (donation) => {
     if (!userName || !userPhone) {
@@ -37,7 +36,7 @@ export default function Home({ donations, setDonations }) {
       return;
     }
 
-    const message = `Hi, I am ${userName}.\nI would like to avail the food donation:\n\nDish: ${donation.dishName}\nServes: ${donation.servesCount}\nLocation: ${donation.venue}\nDate & Time: ${donation.date} ${donation.time}\n\nPlease confirm availability.`;
+    const message = `Hi, I am ${userName}.\nI would like to avail this food:\n\nDish: ${donation.dishName}\nServes: ${donation.servesCount}\nLocation: ${donation.venue}\nDate & Time: ${donation.date} ${donation.time}\n\nMy contact: ${userPhone}`;
 
     const encodedMessage = encodeURIComponent(message);
     const whatsappLink = `https://wa.me/${donation.donorPhone}?text=${encodedMessage}`;
@@ -57,9 +56,49 @@ export default function Home({ donations, setDonations }) {
       {toast && <Toast message={toast.message} type={toast.type} />}
 
       {/* Hero Section */}
-      <div className="card card-accent" style={{ padding: '2rem', marginBottom: '2rem', textAlign: 'center', color: 'white' }}>
-        <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>🍽️ Share Food, Share Love</h1>
-        <p style={{ fontSize: '1.1rem' }}>Find and avail excess food from donors in your community</p>
+      <div className="card hero-card hero-banner">
+        <div>
+          <h1>🍽️ Share food with ease</h1>
+          <p>Discover fresh meals donated by neighbours, claim your meal quickly, and coordinate pickup via WhatsApp.</p>
+          <div className="hero-actions">
+            <button className="btn btn-primary" onClick={() => navigate('/add-donation')}>Donate now</button>
+            <button className="btn btn-secondary" onClick={() => navigate('/dashboard')}>View my donations</button>
+          </div>
+        </div>
+        <div className="hero-tiles">
+          <div className="hero-tile">
+            <span>Fresh Meals</span>
+            <p>Home-cooked food ready to share.</p>
+          </div>
+          <div className="hero-tile">
+            <span>Kind Neighbors</span>
+            <p>Local donors offering extra servings.</p>
+          </div>
+          <div className="hero-tile">
+            <span>Instant Avail</span>
+            <p>Connect via WhatsApp instantly.</p>
+          </div>
+          <div className="hero-tile">
+            <span>Safe Pickup</span>
+            <p>Easy handoff locations.</p>
+          </div>
+          <div className="hero-tile">
+            <span>Easy Donate</span>
+            <p>Publish your meal in minutes.</p>
+          </div>
+          <div className="hero-tile">
+            <span>Community</span>
+            <p>Support local food sharing.</p>
+          </div>
+          <div className="hero-tile">
+            <span>Soft Design</span>
+            <p>Pastel visuals for calm browsing.</p>
+          </div>
+          <div className="hero-tile">
+            <span>Quick Filter</span>
+            <p>Search by venue with ease.</p>
+          </div>
+        </div>
       </div>
 
       {/* User Info Form */}
@@ -88,19 +127,21 @@ export default function Home({ donations, setDonations }) {
       </div>
 
       {/* Filter Section */}
-      <div style={{ marginBottom: '2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
-        <h2 className="section-title" style={{ margin: 0 }}>Available Donations</h2>
+      <div className="section-header">
+        <div>
+          <h2 className="section-title">Available Donations</h2>
+          <p className="section-copy">Browse all shared meals and choose the one that fits your schedule.</p>
+        </div>
         {locations.length > 0 && (
-          <select 
-            value={selectedLocation} 
-            onChange={(e) => setSelectedLocation(e.target.value)}
-            style={{ padding: '0.5rem', borderRadius: '8px', border: '2px solid #E0E0E0', fontSize: '1rem' }}
-          >
-            <option value="all">All Locations</option>
-            {locations.map(loc => (
-              <option key={loc} value={loc}>{loc}</option>
-            ))}
-          </select>
+          <div className="location-filter">
+            <label>Filter by location</label>
+            <select value={selectedLocation} onChange={(e) => setSelectedLocation(e.target.value)}>
+              <option value="all">All locations</option>
+              {locations.map(loc => (
+                <option key={loc} value={loc}>{loc}</option>
+              ))}
+            </select>
+          </div>
         )}
       </div>
 

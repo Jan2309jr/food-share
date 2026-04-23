@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Toast from '../components/Toast';
+import { API_URL } from '../config.js';
 
-const API_URL = 'http://localhost:5000/api';
-
-export default function AddDonation({ setDonations }) {
+export default function AddDonation() {
   const [form, setForm] = useState({
     dishName: '',
     servesCount: '',
@@ -47,12 +46,12 @@ export default function AddDonation({ setDonations }) {
 
     setLoading(true);
     try {
-      const response = await axios.post(`${API_URL}/donations`, form);
+      await axios.post(`${API_URL}/donations`, form);
       showToast('Donation added successfully! 🎉', 'success');
       setTimeout(() => {
         navigate('/dashboard');
       }, 1500);
-    } catch (error) {
+    } catch {
       showToast('Failed to add donation. Please try again.', 'error');
     } finally {
       setLoading(false);
@@ -64,13 +63,15 @@ export default function AddDonation({ setDonations }) {
       {toast && <Toast message={toast.message} type={toast.type} />}
 
       {/* Header */}
-      <div className="card card-secondary" style={{ padding: '2rem', marginBottom: '2rem', textAlign: 'center', color: 'white' }}>
-        <h1 style={{ fontSize: '2rem', marginBottom: '1rem' }}>🎁 Share Your Food</h1>
-        <p>Fill in the details of your food donation</p>
+      <div className="page-hero page-hero-strong" style={{ marginBottom: '2rem' }}>
+        <div>
+          <p className="eyebrow">Add a donation</p>
+          <h1>Share a meal with someone nearby</h1>
+          <p className="section-copy">Tell the community what you're giving, where to pick it up, and when it’s ready.</p>
+        </div>
       </div>
 
-      {/* Form */}
-      <div className="card" style={{ maxWidth: '600px', margin: '0 auto 2rem', padding: '2rem', background: 'white' }}>
+      <div className="panel-card" style={{ maxWidth: '720px', margin: '0 auto 2rem' }}>
         <form onSubmit={handleSubmit}>
           {/* Donor Information */}
           <h3 style={{ marginBottom: '1.5rem', color: 'var(--accent)' }}>👤 Your Information</h3>

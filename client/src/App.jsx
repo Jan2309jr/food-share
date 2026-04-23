@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import AddDonation from './pages/AddDonation';
@@ -13,12 +13,13 @@ function App() {
       <div className="App">
         <nav className="navbar">
           <div className="nav-container">
-            <a href="/" className="nav-logo">
+            <Link to="/" className="nav-logo">
               🍽️ FoodShare
-            </a>
+            </Link>
             <div className="nav-links">
-              <a href="/" className="nav-link">Home</a>
-              <a href="/dashboard" className="nav-link">My Dashboard</a>
+              <Link to="/" className="nav-link">Home</Link>
+              <Link to="/add-donation" className="nav-link">Add Donation</Link>
+              <Link to="/dashboard" className="nav-link">Dashboard</Link>
             </div>
           </div>
         </nav>
