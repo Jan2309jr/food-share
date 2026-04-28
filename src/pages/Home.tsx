@@ -11,7 +11,12 @@ const Home: React.FC = () => {
     const fetchListings = async () => {
       try {
         const response = await axios.get('/api/listings');
-        setListings(response.data);
+        if (Array.isArray(response.data)) {
+          setListings(response.data);
+        } else {
+          console.error('API did not return an array', response.data);
+          setListings([]);
+        }
       } catch (error) {
         console.error('Error fetching listings', error);
       } finally {

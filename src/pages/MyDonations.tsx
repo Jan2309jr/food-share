@@ -20,8 +20,12 @@ const MyDonations: React.FC = () => {
   const fetchMyListings = async () => {
     try {
       const response = await axios.get('/api/listings');
-      const myListings = response.data.filter((l: any) => l.donor_id === user?.id);
-      setListings(myListings);
+      if (Array.isArray(response.data)) {
+        const myListings = response.data.filter((l: any) => l.donor_id === user?.id);
+        setListings(myListings);
+      } else {
+        setListings([]);
+      }
     } catch (error) {
       console.error('Error fetching listings', error);
     }
