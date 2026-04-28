@@ -19,7 +19,7 @@ const MyDonations: React.FC = () => {
 
   const fetchMyListings = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/listings');
+      const response = await axios.get('/api/listings');
       const myListings = response.data.filter((l: any) => l.donor_id === user?.id);
       setListings(myListings);
     } catch (error) {
@@ -30,7 +30,7 @@ const MyDonations: React.FC = () => {
   const handleDelete = async () => {
     if (!deletingListing) return;
     try {
-      await axios.delete(`http://localhost:5000/api/listings/${deletingListing.id}`, {
+      await axios.delete(`/api/listings/${deletingListing.id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setDeletingListing(null);
@@ -54,7 +54,7 @@ const MyDonations: React.FC = () => {
 
     try {
       // Using POST for the update route as configured in backend
-      await axios.post(`http://localhost:5000/api/listings/${editingListing.id}`, data, {
+      await axios.post(`/api/listings/${editingListing.id}`, data, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
@@ -106,7 +106,7 @@ const MyDonations: React.FC = () => {
               }}>
                 {listing.image_url ? (
                   <img 
-                    src={`http://localhost:5000${listing.image_url}`} 
+                    src={listing.image_url} 
                     alt={listing.food_name}
                     style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                   />

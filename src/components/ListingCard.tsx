@@ -30,7 +30,7 @@ const ListingCard: React.FC<{ listing: Listing }> = ({ listing }) => {
     window.open(whatsappUrl, '_blank');
   };
 
-  const fullImageUrl = listing.image_url ? `http://localhost:5000${listing.image_url}` : null;
+  const fullImageUrl = listing.image_url ? listing.image_url : null;
 
   return (
     <div style={{ 

@@ -10,7 +10,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     const fetchListings = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/listings');
+        const response = await axios.get('/api/listings');
         setListings(response.data);
       } catch (error) {
         console.error('Error fetching listings', error);

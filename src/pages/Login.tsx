@@ -20,14 +20,14 @@ const Login: React.FC = () => {
     setError('');
     try {
       if (isLogin) {
-        const response = await axios.post('http://localhost:5000/api/auth/login', {
+        const response = await axios.post('/api/auth/login', {
           username: formData.username,
           password: formData.password
         });
         login(response.data.token, response.data.user);
         navigate('/');
       } else {
-        await axios.post('http://localhost:5000/api/auth/register', formData);
+        await axios.post('/api/auth/register', formData);
         setIsLogin(true);
         setError('Account created! Sign in below.');
       }

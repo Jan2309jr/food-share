@@ -38,7 +38,7 @@ const Donate: React.FC = () => {
     }
 
     try {
-      await axios.post('http://localhost:5000/api/listings', data, {
+      await axios.post('/api/listings', data, {
         headers: { 
           Authorization: `Bearer ${token}`,
           'Content-Type': 'multipart/form-data'
