@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import ListingCard from '../components/ListingCard';
 import { ArrowDownRight } from 'lucide-react';
+import heroImage from '../assets/foodshare.webp';
 
 const Home: React.FC = () => {
   const [listings, setListings] = useState([]);
@@ -62,7 +63,7 @@ const Home: React.FC = () => {
               overflow: 'hidden'
             }}>
               <img 
-                src="https://images.unsplash.com/photo-1488459711635-de048abc55b2?auto=format&fit=crop&q=80&w=1200" 
+                src={heroImage} 
                 alt="Community Food"
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
               />
