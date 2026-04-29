@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useAuth } from '../context/AuthContext';
-import { Trash2, Edit, Package, ImageOff, X, AlertTriangle, Check, Upload } from 'lucide-react';
+import { Trash2, Edit, Package, ImageOff, X, AlertTriangle, Upload } from 'lucide-react';
 
 const MyDonations: React.FC = () => {
   const [listings, setListings] = useState([]);
